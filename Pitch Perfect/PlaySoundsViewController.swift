@@ -16,6 +16,7 @@ class PlaySoundsViewController: UIViewController {
     
     var audioEngine: AVAudioEngine!
     var audioFile: AVAudioFile!
+    let audioPlayerNode: AVAudioPlayerNode! = AVAudioPlayerNode()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,9 +74,52 @@ class PlaySoundsViewController: UIViewController {
         audioPlayerNode.play()
     }
     
+    @IBAction func playAudioEcho(sender: UIButton) {
+        audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+        
+        let audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        let echoEffect = AVAudioUnitDelay()
+        echoEffect.delayTime = NSTimeInterval(0.5)
+        audioEngine.attachNode(echoEffect)
+        
+        audioEngine.connect(audioPlayerNode, to: echoEffect, format: nil)
+        audioEngine.connect(echoEffect, to: audioEngine.outputNode, format: nil)
+        
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        
+        try! audioEngine.start()
+        audioPlayerNode.play()
+    }
+    
+    @IBAction func playAudioReverb(sender: UIButton) {
+        audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+        
+        let audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        let reverbEffect = AVAudioUnitReverb()
+        reverbEffect.loadFactoryPreset(AVAudioUnitReverbPreset.Cathedral)
+        reverbEffect.wetDryMix = 70
+        audioEngine.attachNode(reverbEffect)
+        
+        audioEngine.connect(audioPlayerNode, to: reverbEffect, format: nil)
+        audioEngine.connect(reverbEffect, to: audioEngine.outputNode, format: nil)
+        
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        
+        try! audioEngine.start()
+        audioPlayerNode.play()
+    }
     
     @IBAction func stopAudio(sender: UIButton) {
         audioPlayer.stop()
+        audioEngine.stop()
     }
     
     override func didReceiveMemoryWarning() {
