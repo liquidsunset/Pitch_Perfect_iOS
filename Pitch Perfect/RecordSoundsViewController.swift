@@ -45,8 +45,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopButton.hidden = false
         pauseButton.hidden = false
         resumeButton.hidden = false
-        recordingInProgress.text = "Recording ..."
         recordButton.enabled = false
+        recordingInProgress.text = "Recording ..."
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         
