@@ -14,7 +14,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
-    @IBOutlet weak var tapToRecord: UILabel!
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var resumeButton: UIButton!
     
     var audioRecorder: AVAudioRecorder!
     var recordedAudio: RecordedAudio!
@@ -31,14 +32,20 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewWillAppear(animated: Bool) {
         recordButton.enabled = true
+        pauseButton.hidden = true
+        pauseButton.enabled = true
+        resumeButton.hidden = true
+        resumeButton.enabled = false
         stopButton.hidden = true
-        tapToRecord.hidden = false
+        recordingInProgress.hidden = false
+        recordingInProgress.text = "Tap to Record"
     }
 
     @IBAction func recordAudio(sender: UIButton) {
         stopButton.hidden = false
-        tapToRecord.hidden = true
-        recordingInProgress.hidden = false
+        pauseButton.hidden = false
+        resumeButton.hidden = false
+        recordingInProgress.text = "Recording ..."
         recordButton.enabled = false
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
@@ -55,7 +62,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.meteringEnabled = true
         audioRecorder.prepareToRecord()
         audioRecorder.record()
-        
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
@@ -84,5 +90,20 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
     }
+    
+    @IBAction func pauseAudioRecording(sender: UIButton) {
+        resumeButton.enabled = true
+        pauseButton.enabled = false
+        audioRecorder.pause()
+        recordingInProgress.text = "Recording paused"
+    }
+    
+    @IBAction func resumeAudioRecording(sender: UIButton) {
+        resumeButton.enabled = false
+        pauseButton.enabled = true
+        audioRecorder.record()
+        recordingInProgress.text = "Recording ..."
+    }
+    
 }
 
