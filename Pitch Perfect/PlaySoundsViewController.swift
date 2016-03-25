@@ -10,7 +10,9 @@ import UIKit
 import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
-
+    
+    @IBOutlet weak var recordTimeLabel: UILabel!
+    
     var receivedAudio: RecordedAudio!
     
     var audioEngine: AVAudioEngine!
@@ -24,6 +26,11 @@ class PlaySoundsViewController: UIViewController {
         audioEngine = AVAudioEngine()
         audioPlayerNode = AVAudioPlayerNode()
         audioFile = try! AVAudioFile(forReading: receivedAudio.filePathUrl)
+        print(receivedAudio.getAudioLengthInSec())
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        recordTimeLabel.text = "Rec.-Time: " + String(receivedAudio.getAudioLengthInSec()) + "s"
     }
     
     @IBAction func playAudioSlow(sender: UIButton) {
@@ -43,7 +50,7 @@ class PlaySoundsViewController: UIViewController {
     }
     
     
-    private func playAudioWithVariablePitchOrRate(pitch: Float?, rate: Float?){
+    func playAudioWithVariablePitchOrRate(pitch: Float?, rate: Float?){
         reinitAudioEngine()
         
         let changePitchEffect = AVAudioUnitTimePitch()
@@ -99,7 +106,7 @@ class PlaySoundsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func reinitAudioEngine(){
+    func reinitAudioEngine(){
         audioEngine.stop()
         audioEngine.reset()
         audioPlayerNode = AVAudioPlayerNode()
@@ -107,7 +114,7 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.attachNode(audioPlayerNode)
     }
     
-    private func playSoundWithEffect(){
+    func playSoundWithEffect(){
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
         
         try! audioEngine.start()
