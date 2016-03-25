@@ -11,76 +11,59 @@ import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
 
-    var audioPlayer: AVAudioPlayer!
     var receivedAudio: RecordedAudio!
     
     var audioEngine: AVAudioEngine!
     var audioFile: AVAudioFile!
-    let audioPlayerNode: AVAudioPlayerNode! = AVAudioPlayerNode()
+    var audioPlayerNode: AVAudioPlayerNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         audioEngine = AVAudioEngine()
+        audioPlayerNode = AVAudioPlayerNode()
         audioFile = try! AVAudioFile(forReading: receivedAudio.filePathUrl)
-        audioPlayer = try! AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
-        audioPlayer.enableRate = true
-
     }
     
     @IBAction func playAudioSlow(sender: UIButton) {
-        playAudioWithVariableRate(0.5)
+        playAudioWithVariablePitchOrRate(nil, rate: 0.5)
     }
 
     @IBAction func playAudioFast(sender: UIButton) {
-        playAudioWithVariableRate(1.5)
-    }
-    
-    private func playAudioWithVariableRate(rate: Float){
-        audioPlayer.stop()
-        audioPlayer.rate = rate
-        audioPlayer.currentTime = 0.0
-        audioPlayer.play()
+        playAudioWithVariablePitchOrRate(nil, rate: 1.5)
     }
     
     @IBAction func playAudioChipmunk(sender: UIButton) {
-        playAudioWithVariablePitch(1000)
+        playAudioWithVariablePitchOrRate(1000, rate: nil)
     }
     
     @IBAction func playAudioDarthVader(sender: UIButton) {
-        playAudioWithVariablePitch(-1000)
+        playAudioWithVariablePitchOrRate(-1000,   rate: nil)
     }
     
     
-    private func playAudioWithVariablePitch(pitch: Float){
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
-        
-        let audioPlayerNode = AVAudioPlayerNode()
-        audioEngine.attachNode(audioPlayerNode)
+    private func playAudioWithVariablePitchOrRate(pitch: Float?, rate: Float?){
+        reinitAudioEngine()
         
         let changePitchEffect = AVAudioUnitTimePitch()
-        changePitchEffect.pitch = pitch
+        
+        if  rate == nil {
+            changePitchEffect.pitch = pitch!
+        }else {
+            changePitchEffect.rate = rate!
+        }
+        
         audioEngine.attachNode(changePitchEffect)
         
         audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
         audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
         
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-        
-        try! audioEngine.start()
-        audioPlayerNode.play()
+        playSoundWithEffect()
     }
     
     @IBAction func playAudioEcho(sender: UIButton) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
-        
-        let audioPlayerNode = AVAudioPlayerNode()
-        audioEngine.attachNode(audioPlayerNode)
+        reinitAudioEngine()
         
         let echoEffect = AVAudioUnitDelay()
         echoEffect.delayTime = NSTimeInterval(0.5)
@@ -89,42 +72,46 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.connect(audioPlayerNode, to: echoEffect, format: nil)
         audioEngine.connect(echoEffect, to: audioEngine.outputNode, format: nil)
         
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-        
-        try! audioEngine.start()
-        audioPlayerNode.play()
+        playSoundWithEffect()
     }
     
     @IBAction func playAudioReverb(sender: UIButton) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
-        
-        let audioPlayerNode = AVAudioPlayerNode()
-        audioEngine.attachNode(audioPlayerNode)
+        reinitAudioEngine()
         
         let reverbEffect = AVAudioUnitReverb()
         reverbEffect.loadFactoryPreset(AVAudioUnitReverbPreset.Cathedral)
-        reverbEffect.wetDryMix = 70
+        reverbEffect.wetDryMix = 50
         audioEngine.attachNode(reverbEffect)
         
         audioEngine.connect(audioPlayerNode, to: reverbEffect, format: nil)
         audioEngine.connect(reverbEffect, to: audioEngine.outputNode, format: nil)
         
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-        
-        try! audioEngine.start()
-        audioPlayerNode.play()
+        playSoundWithEffect()
     }
     
     @IBAction func stopAudio(sender: UIButton) {
-        audioPlayer.stop()
         audioEngine.stop()
+        audioEngine.reset()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func reinitAudioEngine(){
+        audioEngine.stop()
+        audioEngine.reset()
+        audioPlayerNode = AVAudioPlayerNode()
+
+        audioEngine.attachNode(audioPlayerNode)
+    }
+    
+    private func playSoundWithEffect(){
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        
+        try! audioEngine.start()
+        audioPlayerNode.play()
     }
 
 }

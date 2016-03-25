@@ -38,16 +38,10 @@
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" red="0.14509803921568626" green="0.28235294117647058" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="161" y="358" width="80" height="17"/>
-                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BpO-i5-Lz6">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" image="pausebutton"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="95" y="502" width="50" height="50"/>
-                                </variation>
                                 <connections>
                                     <action selector="pauseAudioRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kbm-rb-qz5"/>
                                 </connections>
@@ -55,9 +49,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jiv-Gg-yTA">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" image="resumebutton"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="244" y="502" width="50" height="50"/>
-                                </variation>
                                 <connections>
                                     <action selector="resumeAudioRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tEb-gw-5vP"/>
                                 </connections>
@@ -69,10 +60,10 @@
                             <constraint firstItem="W5x-Cc-ebh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="JPr-OJ-7MV"/>
                             <constraint firstItem="HXz-Uc-Oua" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KHQ-KN-PL2"/>
                             <constraint firstItem="W5x-Cc-ebh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RLZ-Nt-knc"/>
-                            <constraint firstItem="Jiv-Gg-yTA" firstAttribute="leading" secondItem="HXz-Uc-Oua" secondAttribute="trailing" constant="19" id="i6B-5O-rrw"/>
+                            <constraint firstItem="Jiv-Gg-yTA" firstAttribute="leading" secondItem="HXz-Uc-Oua" secondAttribute="trailing" constant="25" id="i6B-5O-rrw"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="BpO-i5-Lz6" secondAttribute="bottom" constant="48" id="ndA-s5-STq"/>
                             <constraint firstItem="83D-Fc-dWi" firstAttribute="top" secondItem="W5x-Cc-ebh" secondAttribute="bottom" constant="8" id="nxB-fh-CBF"/>
-                            <constraint firstItem="HXz-Uc-Oua" firstAttribute="leading" secondItem="BpO-i5-Lz6" secondAttribute="trailing" constant="30" id="rUR-bo-dtR"/>
+                            <constraint firstItem="HXz-Uc-Oua" firstAttribute="leading" secondItem="BpO-i5-Lz6" secondAttribute="trailing" constant="25" id="rUR-bo-dtR"/>
                             <constraint firstItem="83D-Fc-dWi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="s6j-sS-iE6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Jiv-Gg-yTA" secondAttribute="bottom" constant="48" id="yJJ-Qk-3Ot"/>
                         </constraints>
@@ -85,16 +76,16 @@
                                 <exclude reference="Jiv-Gg-yTA"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="JPr-OJ-7MV"/>
-                                <exclude reference="RLZ-Nt-knc"/>
+                                <exclude reference="78r-xw-TH7"/>
+                                <exclude reference="ndA-s5-STq"/>
+                                <exclude reference="yJJ-Qk-3Ot"/>
+                                <exclude reference="i6B-5O-rrw"/>
                                 <exclude reference="nxB-fh-CBF"/>
                                 <exclude reference="s6j-sS-iE6"/>
                                 <exclude reference="KHQ-KN-PL2"/>
                                 <exclude reference="rUR-bo-dtR"/>
-                                <exclude reference="i6B-5O-rrw"/>
-                                <exclude reference="78r-xw-TH7"/>
-                                <exclude reference="ndA-s5-STq"/>
-                                <exclude reference="yJJ-Qk-3Ot"/>
+                                <exclude reference="JPr-OJ-7MV"/>
+                                <exclude reference="RLZ-Nt-knc"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -106,16 +97,16 @@
                                 <include reference="Jiv-Gg-yTA"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="JPr-OJ-7MV"/>
-                                <include reference="RLZ-Nt-knc"/>
+                                <include reference="78r-xw-TH7"/>
+                                <include reference="ndA-s5-STq"/>
+                                <include reference="yJJ-Qk-3Ot"/>
+                                <include reference="i6B-5O-rrw"/>
                                 <include reference="nxB-fh-CBF"/>
                                 <include reference="s6j-sS-iE6"/>
                                 <include reference="KHQ-KN-PL2"/>
                                 <include reference="rUR-bo-dtR"/>
-                                <include reference="i6B-5O-rrw"/>
-                                <include reference="78r-xw-TH7"/>
-                                <include reference="ndA-s5-STq"/>
-                                <include reference="yJJ-Qk-3Ot"/>
+                                <include reference="JPr-OJ-7MV"/>
+                                <include reference="RLZ-Nt-knc"/>
                             </mask>
                         </variation>
                     </view>
@@ -290,14 +281,14 @@
     </scenes>
     <resources>
         <image name="microphone" width="100" height="100"/>
-        <image name="pausebutton" width="80" height="80"/>
+        <image name="pausebutton" width="50" height="50"/>
         <image name="playchipmunkbutton" width="100" height="100"/>
         <image name="playechobutton" width="100" height="100"/>
         <image name="playfastbutton" width="100" height="100"/>
         <image name="playreverbbutton" width="100" height="100"/>
         <image name="playslowbutton" width="100" height="100"/>
         <image name="playvaderbutton" width="100" height="100"/>
-        <image name="resumebutton" width="100" height="100"/>
+        <image name="resumebutton" width="50" height="50"/>
         <image name="stopbutton" width="50" height="50"/>
     </resources>
 </document>

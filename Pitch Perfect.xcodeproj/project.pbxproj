@@ -16,7 +16,6 @@
 		3483EB931CA3173200F24B55 /* Pitch_PerfectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483EB921CA3173200F24B55 /* Pitch_PerfectTests.swift */; };
 		3483EB9E1CA3173200F24B55 /* Pitch_PerfectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483EB9D1CA3173200F24B55 /* Pitch_PerfectUITests.swift */; };
 		3483EBAC1CA3322300F24B55 /* PlaySoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483EBAB1CA3322300F24B55 /* PlaySoundsViewController.swift */; };
-		3483EBAE1CA3372900F24B55 /* movie_quote.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3483EBAD1CA3372900F24B55 /* movie_quote.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +51,6 @@
 		3483EB9D1CA3173200F24B55 /* Pitch_PerfectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitch_PerfectUITests.swift; sourceTree = "<group>"; };
 		3483EB9F1CA3173200F24B55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3483EBAB1CA3322300F24B55 /* PlaySoundsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySoundsViewController.swift; sourceTree = "<group>"; };
-		3483EBAD1CA3372900F24B55 /* movie_quote.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = movie_quote.mp3; path = ../../sounds/movie_quote.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +106,6 @@
 				3464757E1CA3E4B300AF5AA3 /* RecordedAudio.swift */,
 				3483EB811CA3173100F24B55 /* Main.storyboard */,
 				3483EBAB1CA3322300F24B55 /* PlaySoundsViewController.swift */,
-				3483EBAD1CA3372900F24B55 /* movie_quote.mp3 */,
 				3483EB841CA3173100F24B55 /* Assets.xcassets */,
 				3483EB861CA3173100F24B55 /* LaunchScreen.storyboard */,
 				3483EB891CA3173100F24B55 /* Info.plist */,
@@ -240,7 +237,6 @@
 			files = (
 				3483EB881CA3173100F24B55 /* LaunchScreen.storyboard in Resources */,
 				3483EB851CA3173100F24B55 /* Assets.xcassets in Resources */,
-				3483EBAE1CA3372900F24B55 /* movie_quote.mp3 in Resources */,
 				3483EB831CA3173100F24B55 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
