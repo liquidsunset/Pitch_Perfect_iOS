@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
+class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate, UIAlertViewDelegate {
 
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var stopButton: UIButton!
@@ -71,12 +71,22 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
             performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         }else {
-            print("Recording was not successful")
+            showAlertMessage("Recording", message: "Recording was not successful")
             recordButton.enabled = true
             stopButton.hidden = true
             resumeButton.hidden = true
             pauseButton.hidden = true
         }
+    }
+    
+    func showAlertMessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+        alertController.addAction(ok)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
